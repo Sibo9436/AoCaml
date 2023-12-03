@@ -1,1 +1,1 @@
-let () = print_endline "Hello, World!"
+let () = print_endline "Call dune exec dayxx to actually solve the problems"
