@@ -1,4 +1,0 @@
-(executable
- (public_name Day20)
- (name main)
- (libraries Day20))
