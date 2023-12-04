@@ -3,11 +3,18 @@ let seq_of_file f = let inch = open_in f
   in let read_line_opt () = try Some(input_line inch) with End_of_file -> None
   in Seq.of_dispenser read_line_opt
 
-let print_string_list s  = print_char '[';List.iter (fun s -> print_string s) s ; print_endline "]"
+let print_string_list s  = print_string "[\n";List.iter (fun s -> print_string s;print_char '\n') s ; print_endline "]"
+
+(* I don't really love this solution so I think I'm gonna roll out my own soon *)
+let handle_args = let input_file = ref ""
+  in let anon filename = input_file := filename
+  in let speclist = []
+  in let usage_msg = "missing filename"
+  in Arg.parse speclist anon usage_msg; !input_file
 
 module Char = struct 
   include Char
-  let is_ascii_number = function 
+  let is_digit = function 
     | '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9'  -> true
     | _ -> false
 end

@@ -41,7 +41,7 @@ in print_endline result ; result
 let () = let file  = open_in _inputf
   in let read_line_opt () = try Some(input_line file) with End_of_file -> None
   in
-  let find_pair x  = let just_num =  String.fold_left (fun acc c -> if String.length acc = 0 && Char.is_ascii_number c then  String.make 1 c   else acc ) ""
+  let find_pair x  = let just_num =  String.fold_left (fun acc c -> if String.length acc = 0 && Char.is_digit c then  String.make 1 c   else acc ) ""
     in just_num x  ^ just_num (string_rev x)
   in 
   let rec _first = function 
