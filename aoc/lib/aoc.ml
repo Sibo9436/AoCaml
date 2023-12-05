@@ -19,6 +19,11 @@ module Char = struct
     | _ -> false
 end
 
+module Fun = struct 
+    include Fun 
+  let compose f g x = f(g x)
+end
+
 module String = struct 
   include String 
   let split_once str c = 
