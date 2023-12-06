@@ -44,6 +44,7 @@ let part_one (seeds, maps) =
   List.fold_left (fun acc x -> if compare x acc < 0  then x else acc) Int64.max_int mapped
 
   (* l'idea adesso è di mappare i range *)
+(*
 let apply_range a b = 
   let rec apply_single_range  = 
     function Mapping(d, s, range) -> 
@@ -65,6 +66,7 @@ let part_two (seeds, maps) =
 
 
 ;;
+*)
 
 let () = let input  = handle_args 
   |> seq_of_file |>List.of_seq |> String.concat "\n"   in
@@ -79,6 +81,7 @@ let () = let input  = handle_args
     print_endline "Part one:";
     print_int @@ Int64.to_int @@ part_one res  ;
     print_endline "Done";
+   (* 
     let rec seeded = function 
       | [] -> []
     | a::b::rest -> (a,b)::(seeded rest)
@@ -88,6 +91,7 @@ let () = let input  = handle_args
     print_endline "Part two:";
     print_int @@ Int64.to_int @@ part_one (newseedlist, maps)  ;
     print_endline "Done";
+  *)
 
 
 
