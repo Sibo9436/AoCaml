@@ -31,6 +31,12 @@ module String = struct
     let* idx = String.index_opt str c
     in Some (String.sub str 0 idx,try String.sub str (idx+1) (String.length str - idx-1) with | Invalid_argument _ -> ""  )
 
+  let strip_prefix prefix str  = 
+    if String.starts_with ~prefix:prefix str then 
+      String.sub str (String.length prefix) (String.length str - String.length prefix)
+      else str
+    
+
   let find_substr str sub = 
     let rec loop start slen =
       if (slen + start) > String.length str then []
