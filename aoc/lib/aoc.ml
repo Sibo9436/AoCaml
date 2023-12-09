@@ -24,6 +24,14 @@ module Fun = struct
   let compose f g x = f(g x)
 end
 
+module List = struct 
+    include List 
+  let rec last_opt = function 
+      | [] -> None
+    | x::[] ->  Some x 
+    | _::ys -> last_opt ys
+end
+
 module String = struct 
   include String 
   let split_once str c = 
