@@ -44,29 +44,43 @@ let part_one (seeds, maps) =
   List.fold_left (fun acc x -> if compare x acc < 0  then x else acc) Int64.max_int mapped
 
   (* l'idea adesso è di mappare i range *)
-(*
+(* joins range a (a->a') and b(a'->b)  into range c(a->b) 
 let apply_range a b = 
-  let rec apply_single_range  = 
-    function Mapping(d, s, range) -> 
-      List.map (
-      function Mapping (dd,ds,dr) ->
-      let endd = Int64.add d range and dend = Int64.add ds dr in 
-        if Int64.compare d ds>= 0 
-        then if Int64.compare 
-        else if Int64.compare (Int64.add d range) (Int64.add ds  dr)<= 0
-  then 
-        Some Mapping()::apply_single_range()
-        else None
+let rec new_range  = function 
+  |Mapping (dst, src, len)   -> 
+  in 
+  List.map (
 
-    ) m 
+    new_range 
+    ) a |> List.flatten
+
+*)
       
+let rev_mapping maps value = 
+  let rec m li v = match li with 
+    | [] -> v  
+  | Mapping(dest, source, len)::rest -> 
+      if Int64.compare v dest >= 0 && Int64.compare  v  (Int64.add dest  len) < 0 then 
+      Int64.add source (Int64.sub v dest)
+      else  m  rest v 
+  in List.fold_right m  maps value 
+    
       
 
-let part_two (seeds, maps) = 
-
+let part_two seeds maps = 
+  let in_seed_range value = 
+  let rec check = function 
+  | [] -> false
+  | (start,len)::rest -> if Int64.compare value start >= 0 && Int64.compare value (Int64.add start len) < 0 then true else check rest
+in check seeds
+    in 
+let rec work s = match s () with 
+    | Seq.Nil -> failwith "whatthehell"
+    |Seq.Cons(v,rest) -> if in_seed_range (rev_mapping maps v) then v else work rest
+  in 
+  work (Seq.map (Int64.of_int ) @@Seq.ints 0 )
 
 ;;
-*)
 
 let () = let input  = handle_args 
   |> seq_of_file |>List.of_seq |> String.concat "\n"   in
@@ -81,7 +95,6 @@ let () = let input  = handle_args
     print_endline "Part one:";
     print_int @@ Int64.to_int @@ part_one res  ;
     print_endline "Done";
-   (* 
     let rec seeded = function 
       | [] -> []
     | a::b::rest -> (a,b)::(seeded rest)
@@ -89,9 +102,8 @@ let () = let input  = handle_args
     in let (seeds, maps) = res in 
   let newseedlist = seeded seeds in 
     print_endline "Part two:";
-    print_int @@ Int64.to_int @@ part_one (newseedlist, maps)  ;
+    print_int @@ Int64.to_int @@ part_two newseedlist maps ; print_char '\n'  ;
     print_endline "Done";
-  *)
 
 
 
